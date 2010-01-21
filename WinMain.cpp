@@ -8,21 +8,6 @@
 /// Function called whenever one of our windows receives a message
 ///
 ////////////////////////////////////////////////////////////
-LRESULT CALLBACK OnEvent(HWND Handle, UINT Message, WPARAM WParam, LPARAM LParam)
-{
-    switch (Message)
-    {
-        // Quit when we close the main window
-        case WM_CLOSE :
-        {
-            PostQuitMessage(0);
-            return 0;
-        }
-    }
-
-    return DefWindowProc(Handle, Message, WParam, LParam);
-}
-
 
 ////////////////////////////////////////////////////////////
 /// Entry point of application
@@ -34,43 +19,30 @@ LRESULT CALLBACK OnEvent(HWND Handle, UINT Message, WPARAM WParam, LPARAM LParam
 ////////////////////////////////////////////////////////////
 INT WINAPI WinMain(HINSTANCE Instance, HINSTANCE, LPSTR, INT)
 {
-    // Define a class for our main window
-    WNDCLASS WindowClass;
-    WindowClass.style         = 0;
-    WindowClass.lpfnWndProc   = &OnEvent;
-    WindowClass.cbClsExtra    = 0;
-    WindowClass.cbWndExtra    = 0;
-    WindowClass.hInstance     = Instance;
-    WindowClass.hIcon         = NULL;
-    WindowClass.hCursor       = 0;
-    WindowClass.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_BACKGROUND);
-    WindowClass.lpszMenuName  = NULL;
-    WindowClass.lpszClassName = "SFML App";
-    RegisterClass(&WindowClass);
+   // Create the main window
+    sf::Window App(sf::VideoMode(800, 600, 32), "SFML Events");
 
-    // Let's create the main window
-    HWND Window = CreateWindow("SFML App", "SFML Win32", WS_SYSMENU | WS_VISIBLE, 0, 0, 800, 600, NULL, NULL, Instance, NULL);
+    // Get a reference to the input manager associated to our window, and store it for later use
+    const sf::Input& Input = App.GetInput();
 
-    // Loop until a WM_QUIT message is received
-    MSG Message;
-    Message.message = ~WM_QUIT;
-    while (Message.message != WM_QUIT)
+    // Start main loop
+    while (App.IsOpened())
     {
-        if (PeekMessage(&Message, NULL, 0, 0, PM_REMOVE))
+        // Process events
+        sf::Event Event;
+        while (App.GetEvent(Event))
         {
-            // If a message was waiting in the message queue, process it
-            TranslateMessage(&Message);
-            DispatchMessage(&Message);
+            // Close window : exit
+            if (Event.Type == sf::Event::Closed)
+                App.Close();
+
+            // Escape key : exit
+            if ((Event.Type == sf::Event::KeyPressed) && (Event.Key.Code == sf::Key::Escape))
+                App.Close();
         }
-        else
-        {
-        }
+
+        // Display window on screen
+        App.Display();
     }
-    // Destroy the main window
-    DestroyWindow(Window);
-
-    // Don't forget to unregister the window class
-    UnregisterClass("SFML App", Instance);
-
     return EXIT_SUCCESS;
 }
