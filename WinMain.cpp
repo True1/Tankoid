@@ -17,7 +17,7 @@
 /// \return Error code
 ///
 ////////////////////////////////////////////////////////////
-INT WINAPI WinMain(HINSTANCE Instance, HINSTANCE, LPSTR, INT)
+int main(int argc, char *argv[])
 {
    // Create the main window
     sf::Window App(sf::VideoMode(800, 600, 32), "SFML Events");
