@@ -1,26 +1,26 @@
 #include "Field.h"
 
-void Field::Field()
+Field::Field()
 { 
 	type = 0;
 };
 
-void Field::Field(int type)
+Field::Field(int type)
 { 
 	this->type = type;
 };
 
-void Field::~Field();
+Field::~Field()
 { 
 	type = 0;
 };
 
-static int Field::getFieldWidth()
+int Field::getFieldWidth()
 {
 	return 50;	//constant
 };
 
-static int Field::getFieldHeight()
+int Field::getFieldHeight()
 {
 	return 50;	//constant
 };
