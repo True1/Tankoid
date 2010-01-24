@@ -1,22 +1,22 @@
 #include "GlobalMap.h"
 
-LocalMap::LocalMap()
+MapFriends::LocalMap::LocalMap()
 {
 	_renderMap = 0;
 	_minX = _minY = _maxX = _maxY = 0;
 };
 
-LocalMap::~LocalMap()
+MapFriends::LocalMap::~LocalMap()
 {
 	_renderMap = 0;
 	_minX = _minY = _maxX = _maxY = 0;
 };
 
-Field& LocalMap::getElementOnPosition(int globalX, int globalY)
+Field& MapFriends::LocalMap::getElementOnPosition(int globalX, int globalY)
 {
 	return _renderMap->_globalMap[globalX][globalY];
 };
 
-void LocalMap::draw()
+void MapFriends::LocalMap::draw()
 {
 };

@@ -1,17 +1,26 @@
 #include "GlobalMap.h"
 
-GlobalMap::GlobalMap()
+MapFriends::GlobalMap::GlobalMap()
 {
 	_globalX = 0;
 	_globalY = 0;
 	_globalMap = 0;
 };
 
-GlobalMap::GlobalMap(int globaxX, int globalY)
+MapFriends::GlobalMap::GlobalMap(int globalX, int globalY)
 {
+	_globalX = globalX;
+	_globalY = globalY;
+
+	_globalMap = new Field*[_globalX];
+
+	for(int i = 0; i < globalX; i++)
+	{
+		_globalMap[i] = new Field[_globalY];
+	}
 };
 
-GlobalMap::~GlobalMap()
+MapFriends::GlobalMap::~GlobalMap()
 {
 	for(int i = 0; i < _globalX; i++)
 	{
@@ -24,7 +33,7 @@ GlobalMap::~GlobalMap()
 	_globalY = 0;
 };
 
-LocalMap& GlobalMap::getLocalMap(int minX, int maxX, int minY, int maxY)
+MapFriends::LocalMap& MapFriends::GlobalMap::getLocalMap(int minX, int maxX, int minY, int maxY)
 {
 	LocalMap* localMap = new LocalMap();
 	localMap->_renderMap = this;
