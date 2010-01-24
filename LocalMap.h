@@ -1,10 +1,5 @@
 #include "Field.h"
-
-namespace MapFriends 
-{
-	class GlobalMap;
-	class LocalMap;
-}
+#include "MapFriends.h"
 
 //represents one screen. Part of GlobalMap.
 //some kind of iterator for GlobalMap
