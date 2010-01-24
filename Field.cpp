@@ -2,16 +2,17 @@
 
 void Field::Field()
 { 
-	globalPosititionX = 0;
-	globalPosititionY = 0;
 	type = 0;
 };
 
-void Field::Field(int globalPosititionX, int globalPosititionY, int type)
+void Field::Field(int type)
 { 
-	this->globalPosititionX = globalPosititionX;
-	this->globalPosititionY = globalPosititionY;
 	this->type = type;
+};
+
+void Field::~Field();
+{ 
+	type = 0;
 };
 
 static int Field::getFieldWidth()
