@@ -1,29 +1,35 @@
-#include "LocalMap.h"
+#include "Field.h"
+#include "MapFriends.h"
 
 //Global map
 class MapFriends::GlobalMap
 {
-	////this function should have access to private & protected values
-	friend Field& MapFriends::LocalMap::getElementOnPosition(int globalX, int globalY);
-
 private:
 
 	//size
-	int _globalX, _globalY;
+	int _worldX, _worldY;
 
 	//mas of fields.
-	Field** _globalMap;
+	Field** _worldMap;
 
 public:
 	//basic constructor
 	GlobalMap();
 
 	//constructor with size
-	GlobalMap(int globalX, int globalY);
+	GlobalMap(int worldX, int worldY);
 
 	//Destroys all data in class
 	~GlobalMap();
 
-	//get LocalMap(some kind of iterator) for this GlobalMap
+	//get LocalMap(some kind of iterator) for this GlobalMap. 
+	//@Warinng : Uses LocalMap can change _worldMap field.
 	MapFriends::LocalMap& getLocalMap(int minX, int maxX, int minY, int maxY);
+	
+	//returns map size
+	int getWorldX();
+	int getWorldY();
+	
+	//get field 'type'
+	int getFieldType(int posX, int posY);
 };

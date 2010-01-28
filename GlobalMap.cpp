@@ -1,36 +1,36 @@
-#include "GlobalMap.h"
+#include "LocalMap.h"
 
 MapFriends::GlobalMap::GlobalMap()
 {
-	_globalX = 0;
-	_globalY = 0;
-	_globalMap = 0;
+	_worldX = 0;
+	_worldY = 0;
+	_worldMap = 0;
 };
 
-MapFriends::GlobalMap::GlobalMap(int globalX, int globalY)
+MapFriends::GlobalMap::GlobalMap(int worldX, int worldY)
 {
-	_globalX = globalX;
-	_globalY = globalY;
+	_worldX = worldX;
+	_worldY = worldY;
 
-	_globalMap = new Field*[_globalX];
+	_worldMap = new Field*[_worldX];
 
-	for(int i = 0; i < globalX; i++)
+	for(int i = 0; i < worldX; i++)
 	{
-		_globalMap[i] = new Field[_globalY];
+		_worldMap[i] = new Field[_worldY];
 	}
 };
 
 MapFriends::GlobalMap::~GlobalMap()
 {
-	for(int i = 0; i < _globalX; i++)
+	for(int i = 0; i < _worldX; i++)
 	{
-		delete[] _globalMap[i];
+		delete[] _worldMap[i];
 	}
 
-	delete[] _globalMap;
+	delete[] _worldMap;
 
-	_globalX = 0;
-	_globalY = 0;
+	_worldX = 0;
+	_worldY = 0;
 };
 
 MapFriends::LocalMap& MapFriends::GlobalMap::getLocalMap(int minX, int maxX, int minY, int maxY)
@@ -45,3 +45,18 @@ MapFriends::LocalMap& MapFriends::GlobalMap::getLocalMap(int minX, int maxX, int
 
 	return *localMap;
 }
+
+int MapFriends::GlobalMap::getFieldType(int posX, int posY)
+{
+	return _worldMap[posX][posY].getType();
+};
+
+int MapFriends::GlobalMap::getWorldX()
+{
+	return _worldX;
+};
+
+int MapFriends::GlobalMap::getWorldY()
+{
+	return _worldY;
+};
