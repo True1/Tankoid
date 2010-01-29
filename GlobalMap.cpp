@@ -33,15 +33,17 @@ MapFriends::GlobalMap::~GlobalMap()
 	_worldY = 0;
 };
 
-MapFriends::LocalMap& MapFriends::GlobalMap::getLocalMap(int minX, int maxX, int minY, int maxY)
+MapFriends::LocalMap& MapFriends::GlobalMap::getLocalMap(int width, int height)
 {
 	LocalMap* localMap = new LocalMap();
 	localMap->_renderMap = this;
-	localMap->_maxX = maxX;
-	localMap->_minY = minY;
+	localMap->_beginX = width;
+	localMap->_beginY = height;
 
-	localMap->_minX = minX;
-	localMap->_maxY = maxY;
+	localMap->_viewWidth = width / Field::getFieldWidth() + 
+		static_cast<bool>(width % Field::getFieldWidth());
+	localMap->_viewHeight = height / Field::getFieldHeight() + 
+		static_cast<bool>(width % Field::getFieldHeight());
 
 	return *localMap;
 }
