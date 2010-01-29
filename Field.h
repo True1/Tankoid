@@ -17,9 +17,4 @@ public:
 
 	//get type
 	int getType();
-
-	static enum Ground
-	{
-		GROUND_GRASS
-	};
 };
