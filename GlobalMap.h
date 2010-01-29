@@ -4,8 +4,10 @@
 //Global map
 class MapFriends::GlobalMap
 {
-private:
+	//iterator is a friend
+	friend MapFriends::LocalMap;
 
+private:
 	//size
 	int _worldX, _worldY;
 
@@ -23,13 +25,9 @@ public:
 	~GlobalMap();
 
 	//get LocalMap(some kind of iterator) for this GlobalMap. 
-	//@Warinng : Uses LocalMap can change _worldMap field.
-	MapFriends::LocalMap& getLocalMap(int minX, int maxX, int minY, int maxY);
+	MapFriends::LocalMap& getLocalMap(int width, int height);
 	
 	//returns map size
 	int getWorldX();
 	int getWorldY();
-	
-	//get field 'type'
-	int getFieldType(int posX, int posY);
 };

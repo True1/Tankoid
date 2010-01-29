@@ -48,11 +48,6 @@ MapFriends::LocalMap& MapFriends::GlobalMap::getLocalMap(int width, int height)
 	return *localMap;
 }
 
-int MapFriends::GlobalMap::getFieldType(int posX, int posY)
-{
-	return _worldMap[posX][posY].getType();
-};
-
 int MapFriends::GlobalMap::getWorldX()
 {
 	return _worldX;
