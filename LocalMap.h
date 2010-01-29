@@ -23,6 +23,7 @@ public:
 	//note: You don't need to destroy GLobalMap object
 	~LocalMap();
 
+	//@WILL DE MOVED TO ANOTHER CLASS
 	//draws all map elements in the screen
-	void draw();
+	//void draw(unsigned int width, unsigned int height);
 };
