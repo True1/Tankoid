@@ -1,20 +1,23 @@
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-
 #include "LocalMap.h"
 
 MapFriends::LocalMap::LocalMap()
 {
 	_renderMap = 0;
-	_minX = _minY = _maxX = _maxY = 0;
+	_beginX = _beginY = 0;
+	_viewWidth = _viewHeight = 0;
 };
 
 MapFriends::LocalMap::~LocalMap()
 {
 	_renderMap = 0;
-	_minX = _minY = _maxX = _maxY = 0;
+	_beginX = _beginY = 0;
+	_viewWidth = _viewHeight = 0;
 };
 
+int MapFriends::LocalMap::getFieldType(int posX, int posY)
+{
+	return _renderMap->_worldMap[posX][posY].getType();
+}
 
 //@WILL DE MOVED TO ANOTHER CLASS
 /*
