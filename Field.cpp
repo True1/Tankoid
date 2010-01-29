@@ -17,12 +17,12 @@ Field::~Field()
 
 int Field::getFieldWidth()
 {
-	return 50;	//constant
+	return 64;	//constant
 };
 
 int Field::getFieldHeight()
 {
-	return 50;	//constant
+	return 64;	//constant
 };
 
 int Field::getType()
