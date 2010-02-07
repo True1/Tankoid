@@ -8,10 +8,11 @@ GameRender::GameRender(int width, int height) :
 	std::cout << "Creating window...";
 
 	gameWindow.Create(sf::VideoMode(width, height), "Tankoid");
+	mainView.setGlobalMap(&worldMap);
 
 	std::cout << "success" << std::endl;
 
-	if(Region::setLandscapeImage()) std::cout << "loaded background" << std::endl;
+	if(worldMap.setLandscapeImage()) std::cout << "loaded background" << std::endl;
 };
 
 GameRender::~GameRender()
@@ -27,7 +28,7 @@ void GameRender::mainLooP()
 	   // Get a reference to the input manager associated to our window, and store it for later use
     const sf::Input& Input = gameWindow.GetInput();
 	std::cout << "success" << std::endl;
-
+	gameWindow.SetFramerateLimit(60);
 
 
     // Start main loop
@@ -54,7 +55,19 @@ void GameRender::mainLooP()
         if (Input.IsKeyDown(sf::Key::Left))  mainView.move(-Offset,  0);
         if (Input.IsKeyDown(sf::Key::Right)) mainView.move( Offset,  0);
 
+		
 		mainView.setWindow(gameWindow);
+		gameWindow.Clear();
+
+		for(int i = 0; i < 2; i++)
+		{
+			for(int j = 0; j < 2; j++)
+			{
+				sf::Sprite& reg = mainView.getRegionSprite(i, j);
+				gameWindow.Draw(reg);
+			}
+		}
+
 
         // Display window on screen
         gameWindow.Display();

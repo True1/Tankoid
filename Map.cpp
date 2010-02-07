@@ -14,7 +14,7 @@ Map::GlobalMap::GlobalMap(int resolutionWidth, int resolutionHeight,
 	windowWidth = resolutionWidth;
 	windowHeight = resolutionHeight;
 
-	Region::setRegionSize(resolutionWidth / 4, resolutionHeight / 4);
+	Region::setRegionSize(resolutionWidth / 2, resolutionHeight / 2);
 
 	worldNetX = mapWidth / (resolutionWidth / 4)
 		+ static_cast<bool>(mapWidth % (resolutionWidth / 4));
@@ -46,9 +46,18 @@ int Map::GlobalMap::getWorldNetY()
 	return worldNetY;
 };
 
+bool Map::GlobalMap::setLandscapeImage()
+{
+	bool load = false;
+
+	load = background.LoadFromFile("F:/my/Programming/tankoid/sources/Tankoid/back2.jpg");
+
+	return load;
+};
+
 Map::LocalView::LocalView(int centerPositionX, int centerPositionY, 
 						  int resolutionX, int resolutionY) :
-	camera(sf::Vector2f(centerPositionX, centerPositionY), 
+	camera(sf::Vector2f(centerPositionX / 2, centerPositionY / 2), 
 	   sf::Vector2f(resolutionX / 2, resolutionY / 2))
 {
 	renderingMap = 0;
@@ -65,11 +74,21 @@ void Map::LocalView::setGlobalMap(GlobalMap* renderMap)
 
 void Map::LocalView::move(int offsetX, int offsetY)
 {
-	std::cout << "moving camera" << std::endl;
 	camera.Move(offsetX, offsetY);
 };
 
 void Map::LocalView::setWindow(sf::RenderWindow& curWindow)
 {
 	curWindow.SetView(camera);
+}
+
+sf::Sprite& Map::LocalView::getRegionSprite(int positionX, int positionY)
+{
+	sf::Sprite* drawingRegionLandscape = new sf::Sprite(renderingMap->background);
+	int realX = positionX * Region::width;
+	int realY = positionY * Region::height;
+
+	drawingRegionLandscape->SetPosition(realX, realY);
+
+	return *drawingRegionLandscape;
 }

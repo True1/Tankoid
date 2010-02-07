@@ -14,7 +14,9 @@ public:
 	GlobalMap();
 	GlobalMap(int resolutionWidth, int resolutionHeight,
 		int mapWidth, int mapHeight);
-	
+
+	bool setLandscapeImage();
+
 	int getWorldNetX();
 	int getWorldNetY();
 
@@ -24,6 +26,7 @@ private:
 	int worldNetX;
 	int worldNetY;
 	Region** worldNet;
+	sf::Image background;
 };
 
 class Map::LocalView
@@ -35,6 +38,8 @@ public:
 	void move(int offsetX, int offsetY);
 
 	void setWindow(sf::RenderWindow& curWindow);
+
+	sf::Sprite& getRegionSprite(int positionX, int positionY);
 
 private:
 	sf::View camera;

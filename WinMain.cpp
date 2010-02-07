@@ -14,7 +14,6 @@
 ////////////////////////////////////////////////////////////
 int Region::width = 0;
 int Region::height = 0;
-sf::Image* Region::background = new sf::Image();
 
 int main(int argc, char *argv[])
 {
