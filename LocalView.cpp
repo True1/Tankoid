@@ -8,7 +8,7 @@ LocalView::LocalView()
 LocalView::LocalView(MapNet* mapToView)
 {
 	viewingMap = mapToView;
-	resizeView(viewingMap->getRegionWidth() * 2, viewingMap->getRegionHeight() * 2);
+	resizeView(viewingMap->getRegionWidth(), viewingMap->getRegionHeight());
 	setCenterPosition(0, 0);
 };
 
