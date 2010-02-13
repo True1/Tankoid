@@ -21,8 +21,6 @@ int main(int argc, char *argv[])
 
     // Create the main window
     sf::RenderWindow App(sf::VideoMode(800, 600), "Tankoid Views");
-	App.SetFramerateLimit(60);
-	App.UseVerticalSync(true);
 
 	 // Start game loop
     while (App.IsOpened())
