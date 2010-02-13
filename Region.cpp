@@ -1,14 +1,22 @@
 #include "Region.h"
 
-
-
 Region::Region()
 {
 
 };
 
-void Region::setRegionSize(int newWidth, int newHeight)
+void Region::setPosition(float globalPositionX, float globalPositionY)
 {
-	width = newWidth;
-	height = newHeight;
+	drawingBackground.SetPosition(globalPositionX, globalPositionY);
+}
+
+void Region::setBackground(const sf::Image& sourseImage)
+{
+	drawingBackground.SetImage(sourseImage);
 };
+
+void Region::draw(sf::RenderWindow& drawTarget) const
+{
+	drawTarget.Draw(drawingBackground);
+};
+
