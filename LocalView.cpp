@@ -29,13 +29,38 @@ void LocalView::resizeView(float newHalfWidth, float newHalfHeight)
 
 void LocalView::draw(sf::RenderWindow& drawTarget) const
 {
-	int indexI = viewingMap->getMapWidth();
-	int indexJ = viewingMap->getMapHeight();
-	for(int i = 0; i < indexI; i++)
+	int regionX = viewingMap->getRegionWidth();
+	int regionY = viewingMap->getRegionHeight();
+
+	int viewCenterX = originalView.GetCenter().x;
+	int viewCenterY = originalView.GetCenter().y;
+
+	int viewHalfX = originalView.GetHalfSize().x;
+	int viewHalfY = originalView.GetHalfSize().y;
+
+
+	int indexMinI = (viewCenterX - viewHalfX) / regionX;
+
+	int indexMinJ = (viewCenterY - viewHalfY) / regionY;
+
+	int indexMaxI = (viewCenterX + viewHalfX) / regionX
+		+ static_cast<bool>((viewCenterX - viewHalfX) % regionX);
+		
+	int indexMaxJ = (viewCenterY + viewHalfY) / regionY
+		+ static_cast<bool>((viewCenterY - viewHalfY) % regionY);
+
+	int maxMapIndexI = viewingMap->getMapWidth();
+	int maxMapIndexJ = viewingMap->getMapHeight();
+
+	for(int i = indexMinI; i < indexMaxI; i++)
 	{
-		for(int j = 0; j < indexJ; j++)
+		for(int j = indexMinJ; j < indexMaxJ; j++)
 		{
-			viewingMap->regionsNet[i][j].draw(drawTarget);
+			if( (i >= 0) && (j >= 0) 
+				&& 
+				(i < maxMapIndexI) && (j < maxMapIndexJ) )
+				viewingMap->regionsNet[i][j].draw(drawTarget);
 		}
 	}
+
 };
