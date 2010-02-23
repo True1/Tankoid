@@ -12,6 +12,7 @@ public:
 	virtual void draw(sf::RenderWindow& drawTarget) const;
 
 	sf::View originalView;//temp;
+
 private:
 	void resizeView(float newWidth, float newHeight);
 
