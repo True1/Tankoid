@@ -1,6 +1,6 @@
 #include "MapNet.h"
 
-MapNet::MapNet()
+MapNet::MapNet() : backgroundImage()
 {
 	regionHeight = regionWidth = mapNetHeight = mapNetWidth = 0;
 };
