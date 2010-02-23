@@ -1,6 +1,6 @@
 #include "LocalView.h"
 
-LocalView::LocalView()
+LocalView::LocalView() : originalView()
 {
 	viewingMap = 0;
 };
