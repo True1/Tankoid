@@ -3,8 +3,7 @@
 class Region : public IDraw
 {
 	sf::Sprite drawingBackground;
-	BackgroundObject* objectDecoration;
-	int numberDecoration;
+	sf::Image backgroundImage;
 
 public:
 	Region();
@@ -17,5 +16,8 @@ public:
 	//void setDecorationPosition(int index, float relativePositionX, float relativePositionY);
 
 	virtual void draw(sf::RenderWindow& drawTarget) const;
+
+	void addDecorationImage(sf::Image decorationImage, 
+		int relativePositionX, int relativePositionY);
 };
 
