@@ -9,8 +9,8 @@ private:
 
 	sf::Image backgroundImage;
 	
-	static const int limNetHeight = 8;
-	static const int limNetWidth = 8;
+	static const int limNetHeight = 4;
+	static const int limNetWidth = 4;
 
 	int mapNetHeight;
 	int mapNetWidth;
