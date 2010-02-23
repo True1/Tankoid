@@ -69,5 +69,10 @@ void Region::setBackground(const sf::Image& sourseImage)
 void Region::draw(sf::RenderWindow& drawTarget) const
 {
 	drawTarget.Draw(drawingBackground);
+
+	for(int i = 0; i < numberDecoration; i++)
+	{
+		objectDecoration[i].draw(drawTarget);
+	}
 };
 
