@@ -5,13 +5,7 @@ ImageSource loading;
 
 Region::Region() : drawingBackground()
 {
-	numberDecoration = 4;
-	objectDecoration = new BackgroundObject[numberDecoration];
 
-	for(int i = 0; i < numberDecoration; i++)
-	{
-		objectDecoration[i].setImage(loading.getImageForBackgroundObject(i));
-	}
 };
 
 /*
@@ -36,43 +30,34 @@ void Region::setDecorationPosition(int index,
 
 void Region::setPosition(float globalPositionX, float globalPositionY)
 {
-	/*
-	float currentObjectRelativeX = 0;
-	float currentObjectRelativeY = 0;
-
-	for(int i = 0; i < numberDecoration; i++)
-	{
-		currentObjectRelativeX = objectDecoration[i].getPositionX() 
-			- drawingBackground.GetPosition().x;
-
-		currentObjectRelativeY = objectDecoration[i].getPositionY()
-			- drawingBackground.GetPosition().y;
-
-		objectDecoration[i].setPosition(globalPositionX + currentObjectRelativeX, 
-			globalPositionY + currentObjectRelativeY);
-	}*/
-
 	drawingBackground.SetPosition(globalPositionX, globalPositionY);
-
-	for(int i = 0; i < numberDecoration; i++)
-	{
-		objectDecoration[i].setPosition(globalPositionX + i * 70, 
-			globalPositionY + i * 70);
-	}
 }
 
 void Region::setBackground(const sf::Image& sourseImage)
 {
-	drawingBackground.SetImage(sourseImage);
+	backgroundImage = sourseImage;
+
+	int numberDecoration = 4;
+	BackgroundObject* objectDecoration = new BackgroundObject[numberDecoration];
+
+	for(int i = 0; i < numberDecoration; i++)
+	{
+		addDecorationImage(loading.getImageForBackgroundObject(i), 64 * i, 64 * i);
+	}
+
+	drawingBackground.SetImage(backgroundImage);
 };
 
 void Region::draw(sf::RenderWindow& drawTarget) const
 {
 	drawTarget.Draw(drawingBackground);
-
-	for(int i = 0; i < numberDecoration; i++)
-	{
-		objectDecoration[i].draw(drawTarget);
-	}
 };
+
+void Region::addDecorationImage(sf::Image decorationImage, 
+	int relativePositionX, int relativePositionY)
+{
+	backgroundImage.Copy(decorationImage, relativePositionX , relativePositionY, 
+		sf::IntRect(0, 0, 0, 0), true);
+};
+
 
